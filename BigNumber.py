@@ -43,7 +43,51 @@ class BigNumber:
             j = j + 1
         return z[::-1]
 
+    def __sub__(self, another_value):
+        first_value = int("".join(map(str, self.a)))
+        second_value = int("".join(map(str, another_value)))
+        if first_value >= second_value:
+            num = first_value - second_value
+            z = list(map(int, str(num)))
+        else:
+            num = second_value - first_value
+            z = list(map(int, str(num)))
+            z.insert(0, "-")
+        return z
+
+    def __mul__(self, another_value):
+        first_value = int("".join(map(str, self.a)))
+        second_value = int("".join(map(str, another_value)))
+        z = list(map(int, str(first_value * second_value)))
+        return z
+
+    def __truediv__(self, another_value):
+        first_value = int("".join(map(str, self.a)))
+        second_value = int("".join(map(str, another_value)))
+        num = str(first_value / second_value)
+        z = []
+        for i in range(0, len(num)):
+            if num[i] == ".":
+                z.append(".")
+            else:
+                z.append(int(num[i]))
+        return z
+
 
 a = BigNumber([1, 8, 3, 1])
 
 print(a+[4, 9, 8, 2])
+
+a = BigNumber([9, 0])
+
+print(a - [1, 2, 3])
+
+
+a = BigNumber([9, 0])
+
+print(a * [1, 2, 3])
+
+
+a = BigNumber([9, 0])
+
+print(a / [3, 0])
